@@ -11,6 +11,13 @@
 #define CODE_EXTENSION "WARD"
 #define BASIC_LIBRARY ".DEF LIB _WARD"
 
+class BasicLibrary {
+  public:
+    void Print(std::string text){
+      std::cout << text;
+    }
+};
+
 class BasicCompiler {
   protected:
     std::string code_path_;
@@ -25,6 +32,8 @@ class BasicCompiler {
       std::cout << "code is: " << std::endl << "---------" << std::endl;
       if (boost::algorithm::starts_with(file_content, BASIC_LIBRARY) == true){
 	std::cout << file_content << std::endl;
+	std::unique_ptr<BasicLibrary> basic_library = std::make_unique<BasicLibrary>();
+	basic_library->Print("hello world with basic lib!\n");
       } else {
 	std::cout << "did you define basic lib of ward?" << std::endl;
       }
