@@ -1,0 +1,12 @@
+WARD LANGUAGE
+=============
+just another awkWARD
+language written in c++
+and still writing
+
+`$ ./build-compiler.sh`
+`$ ./WARD_COMILER.OUT tests/test.WARD`
+
+BASIC WARD FILE
+===============
+.DEF LIB _WARD ; basic ward library

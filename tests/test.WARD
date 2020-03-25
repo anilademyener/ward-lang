@@ -1,0 +1,6 @@
+.DEF LIB _WARD
+
+__[](INT A)[[
+  A = 25
+  => A
+]]
