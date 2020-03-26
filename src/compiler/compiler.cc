@@ -10,6 +10,7 @@
 #define COMPILER_VERSION "BETA-0.1"
 #define CODE_EXTENSION "WARD"
 #define BASIC_LIBRARY ".DEF LIB _WARD"
+#define PRINT_COMMAND ".CON LOG"
 
 class BasicLibrary {
   public:
@@ -29,11 +30,13 @@ class BasicCompiler {
 	file_content = file_content + str;
 	file_content.push_back('\n');
       }
-      std::cout << "code is: " << std::endl << "---------" << std::endl;
-      if (boost::algorithm::starts_with(file_content, BASIC_LIBRARY) == true){
-	std::cout << file_content << std::endl;
+      //if (boost::algorithm::starts_with(file_content, BASIC_LIBRARY) == true){
+      //if (strchr(file_content.c_str(), '_')){
+      if (file_content.find(BASIC_LIBRARY) != std::string::npos){
 	std::unique_ptr<BasicLibrary> basic_library = std::make_unique<BasicLibrary>();
-	basic_library->Print("hello world with basic lib!\n");
+	if (file_content.find(PRINT_COMMAND) != std::string::npos){
+	  basic_library->Print("NULL\n");
+	}
       } else {
 	std::cout << "did you define basic lib of ward?" << std::endl;
       }
@@ -42,8 +45,6 @@ class BasicCompiler {
       if (boost::filesystem::exists(this->code_path_) == true){
 	std::vector<std::string> split_code_path;
 	boost::split(split_code_path, this->code_path_, [](char c){return c == '.';});
-	std::cout << "0: " << split_code_path[0] << std::endl;
-	std::cout << "1: " << split_code_path[1] << std::endl;
 	if (split_code_path[1] == CODE_EXTENSION){ // extension of code = test.cai
 	  return 0;
 	} else {
@@ -64,7 +65,6 @@ class BasicCompiler {
 };
 
 int main(int c, char *v[]){
-  std::cout << COMPILER_TITLE << " " << COMPILER_VERSION << std::endl; 
   if (c > 1){
     std::unique_ptr<BasicCompiler> basic_compiler = std::make_unique<BasicCompiler>(v[1]);
   } else {

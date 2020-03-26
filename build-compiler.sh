@@ -6,7 +6,7 @@ SOURCES="src/compiler/compiler.cc"
 OUT="WARD_COMPILER"
 BUILDCOMMAND="${CXX} ${CXXFLAGS} ${SOURCES} -o ${OUT}.OUT"
 
-rm -rf ${OUT}.out
+rm -rf ${OUT}.OUT
 ${BUILDCOMMAND}
 if [[ -f ${OUT}.OUT ]]; then
   clear
